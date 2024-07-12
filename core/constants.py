@@ -17,15 +17,40 @@ DEFAULT_SCRIPT_BEGIN = f"""{SHELL_INTERPRETER}
 
 DEFAULT_SCRIPTS = {
     "Python": f"""{DEFAULT_SCRIPT_BEGIN}
-
+# Lint
+poetry run flake8 ./core
+poetry run flake8 ./main.py
+# Errors
+poetry run mypy ./core
+poetry run mypy ./main.py
+# Dependencies
+poetry check
+# Tests 
+poetry run pytest ./test/pre_push.py 
 {GENERATED_WARNING}""",
     "Javascript": f"""{DEFAULT_SCRIPT_BEGIN}
+npm run format
+git add .
+git commit -m "Code autoformatted"
+
+npm run lint
+npm run test
 
 {GENERATED_WARNING}""",
     "Typescript": f"""{DEFAULT_SCRIPT_BEGIN}
+npm run format
+git add .
+git commit -m "Code autoformatted"
 
+npm run lint
+npm run build
+npm outdated
+npm run test
 {GENERATED_WARNING}""",
     "Go": f"""{DEFAULT_SCRIPT_BEGIN}
-
+go vet ./...
+staticcheck ./...
+gosec ./...
+go test -run pre_commit_test.go
 {GENERATED_WARNING}""",
 }
