@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "pre-push"
+version = "0.0.1"
+description = ""
+authors = ["Natan F. dos Santos"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+inquirer = "^3.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
